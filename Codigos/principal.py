@@ -10,7 +10,7 @@ kd = 0.2
 estado_pid = (0, 0, 0, 0)  # prev_x, prev_y, int_x, int_y
     
 # ----- Inicialización -----
-ser = iniciar_serial('COM5', 115200)
+ser = iniciar_serial('/dev/ttyUSB0', 115200)
 crear_trackbars(kp, ki, kd)
 
 cap = cv2.VideoCapture(0)
