@@ -4,7 +4,7 @@ import serial
 import time
 
 # --- CONFIGURACIÓN INICIAL ---
-SERIAL_PORT = '/dev/ttyUSB0'  
+SERIAL_PORT = 'dev/ttyUSB0'  
 BAUD_RATE = 115200
 
 # Inicializar comunicación Serial
