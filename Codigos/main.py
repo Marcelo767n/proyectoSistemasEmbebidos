@@ -4,7 +4,7 @@ import serial
 import time
 
 # --- CONFIGURACIÓN INICIAL ---
-SERIAL_PORT = 'COM5'  # <--- ¡CAMBIA ESTO POR TU PUERTO! (Ej: /dev/ttyUSB0 en Linux/Mac)
+SERIAL_PORT = '/dev/ttyUSB0'  
 BAUD_RATE = 115200
 
 # Inicializar comunicación Serial
