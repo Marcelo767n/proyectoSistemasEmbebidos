@@ -1,11 +1,10 @@
 #include "funciones.h"
 
 void setup() {
-  // Toda la configuración está encapsulada aquí
-  initSystem();
+  inicializarSistema();
 }
 
 void loop() {
-  // El manejo de serie y servos se realiza aquí
-  handleSerialLoop();
+  // Eliminamos la tarea del loop por limpieza, ya que usamos tareas dedicadas
+  vTaskDelete(NULL); 
 }
