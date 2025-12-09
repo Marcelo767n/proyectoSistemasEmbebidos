@@ -51,32 +51,40 @@ void inicializarSistema() {
 }
 
 // --- TAREA 1: LEER PUERTO SERIE ---
+// --- TAREA 1: LECTURA SERIAL OPTIMIZADA (High Speed) ---
 void TareaSerial(void *pvParameters) {
   String inputString = "";
-  inputString.reserve(20); // Optimización pequeña de memoria
+  inputString.reserve(30); // Reservar memoria para evitar fragmentación
 
   for (;;) {
-    if (Serial.available()) {
+    // 1. MIENTRAS haya datos, leemos todo lo posible sin pausas
+    while (Serial.available()) {
       char inChar = (char)Serial.read();
       
       if (inChar == '\n') {
+        // Fin de paquete: Procesar inmediatamente
         int commaIndex = inputString.indexOf(',');
+        
         if (commaIndex > 0) {
           Coordenadas nuevosDatos;
+          // toFloat() es un poco lento, pero aceptable. 
+          // Si necesitas más velocidad, se puede optimizar más con atof().
           nuevosDatos.x = inputString.substring(0, commaIndex).toFloat();
           nuevosDatos.y = inputString.substring(commaIndex + 1).toFloat();
 
-          // Enviar a la cola usando la macro de tiempo de espera
-          xQueueSend(colaServos, &nuevosDatos, (TickType_t)TIEMPO_ESPERA_COLA);
+          // Enviar a la cola SIN esperar (0 ticks) si está llena, 
+          // para no bloquear la lectura de datos nuevos.
+          xQueueSend(colaServos, &nuevosDatos, 0);
         }
-        inputString = "";
+        inputString = ""; // Limpiar buffer
       } else {
         inputString += inChar;
       }
     }
     
-    // Delay para ceder CPU si no hay datos (usando macro)
-    vTaskDelay(DELAY_LOOP_SERIAL_MS / portTICK_PERIOD_MS); 
+    // 2. Solo cuando el buffer serial está VACÍO, hacemos un pequeño delay
+    // para ceder la CPU a otras tareas. 1ms es suficiente.
+    vTaskDelay(1 / portTICK_PERIOD_MS); 
   }
 }
 
