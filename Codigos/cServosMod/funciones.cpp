@@ -50,8 +50,7 @@ void inicializarSistema() {
   Serial.println("Sistema FreeRTOS Iniciado Correctamente.");
 }
 
-// --- TAREA 1: LEER PUERTO SERIE ---
-// --- TAREA 1: LECTURA SERIAL OPTIMIZADA (High Speed) ---
+/// --- TAREA 1: LECTURA SERIAL OPTIMIZADA (High Speed) ---
 void TareaSerial(void *pvParameters) {
   String inputString = "";
   inputString.reserve(30); // Reservar memoria para evitar fragmentación
@@ -87,7 +86,6 @@ void TareaSerial(void *pvParameters) {
     vTaskDelay(1 / portTICK_PERIOD_MS); 
   }
 }
-
 // --- TAREA 2: MOVER SERVOS ---
 void TareaServo(void *pvParameters) {
   Coordenadas datosRecibidos;
