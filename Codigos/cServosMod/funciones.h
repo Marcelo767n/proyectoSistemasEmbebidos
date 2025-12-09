@@ -12,9 +12,9 @@
 #define TIEMPO_ESPERA_COLA    10      // Ticks a esperar si la cola está llena
 
 // --- 2. CONFIGURACIÓN DE PINES ---
-#define PIN_SERVO_A           18
-#define PIN_SERVO_B           19
-#define PIN_SERVO_C           21
+#define PIN_SERVO_A           16
+#define PIN_SERVO_B           17
+#define PIN_SERVO_C           18
 
 // --- 3. CONFIGURACIÓN MECÁNICA ---
 #define ANGULO_CENTRO         90      // Ángulo plano
