@@ -31,7 +31,7 @@ def nothing(x): pass
 
 # --- FUNCIÓN: BÚSQUEDA INTELIGENTE DE CÁMARA ---
 def iniciar_camara_automatica():
-    indices_a_probar = [0, 1, 2, 4, 6, 8] 
+    indices_a_probar = [ 1, 4, 6, 8] #4 es el indice de la camara
     print("\n--- BUSCANDO CÁMARA DISPONIBLE ---")
     for indice in indices_a_probar:
         print(f"🔍 Probando índice {indice}...", end=" ")
